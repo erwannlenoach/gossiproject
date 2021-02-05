@@ -8,22 +8,34 @@
 
 require 'faker'
 
-10.times do |i|
- 	users = User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, age: Faker::Number.number(digits: 2), description: Faker::Lorem.sentence(word_count: 3))
- 	cities = City.create(name: Faker::Address.city, zip_code: Faker::Address.zip)
+10.times do 
+ 	User.create(
+ 		first_name: Faker::Name.first_name, 
+ 		last_name: Faker::Name.last_name, 
+ 		email: Faker::Internet.email, age: Faker::Number.number(digits: 2), 
+ 		description: Faker::Lorem.sentence(word_count: 3)
+ 		city_id: City.all.sample.id
+ 		)
 end 
 
-
-20.times do |i|
- 	gossips = Gossip.create(title: Faker::Quote.yoda, content: Faker::Lorem.sentence(word_count: 9))
+10.times do 
+ 	City.create(
+ 		name: Faker::Address.city, 
+ 		zip_code: Faker::Address.zip)
 end 
 
-
-10.times do |i|
- 	tags = Tag.create(title: Faker::Kpop.boy_bands)
- 
+20.times do 
+ 	Gossip.create(
+ 		title: Faker::Quote.yoda, 
+ 		content: Faker::Lorem.sentence(word_count: 9)
+ 		user_id: User.all.sample.id
+ 		)
 end 
 
-10.times do |i|
- 	privatemessages = PrivateMessage.create(content: Faker::Movies::HarryPotter.quote)
+10.times do 
+ 	Tag.create(title: Faker::Kpop.boy_bands)
+end 
+
+10.times do 
+ 	PrivateMessage.create(content: Faker::Movies::HarryPotter.quote)
  end 
